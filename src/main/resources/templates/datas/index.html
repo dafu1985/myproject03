@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <title>Listing Players - baseball</title>
+    <!-- cssとjavascriptのファイルを読み込む -->
+    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Listing Players</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>名前</th>
+            <th>年齢</th>
+            <th>チーム名</th>
+            <th>守備位置</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Controllerから渡されたplayersに対してループ処理を行っている
+th:each="player:${players}"のようにすることでループ処理を記述できる
+ここの例ではListであるplayersの数だけループを回し、List内の各要素をplayerという変数名で扱う -->
+          <tr th:each="data:${datas}" th:object="${data}">
+            <!-- th:object="${player}"とすることで、このタグより子供の要素で、${player.xxx}を*{xxx}と省略して書けるようになる -->
+            <td th:text="*{id}"></td>
+            <td th:text="*{name}"></td>
+            <td th:text="*{age}"></td>
+            <td th:text="*{team}"></td>
+            <td th:text="*{position}"></td>
+            <!-- th:href="xxx"とすることでhref属性に設定する値を動的にすることができる
+/players/{id}の部分がhref属性に設定される値。{id}の部分は変数を埋め込むことができて、後続の(id=*{id})で値を設定している -->
+            <td><a class="btn btn-default btn-xs" th:href="@{/datas/{id}(id=*{id})}">参照</a></td>
+            <td><a class="btn btn-default btn-xs" th:href="@{/datas/{id}/edit(id=*{id})}">編集</a></td>
+            <td>
+              <!-- 削除の処理はHTTPメソッドをDELETEにしてアクセスしたいので、formタグにしてth:method="delete"を付けている -->
+              <form th:action="@{/datas/{id}(id=*{id})}" th:method="delete">
+                <input class="btn btn-default btn-xs" type="submit" value="削除" />
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <a class="btn btn-default" href="/datas/new">新規作成</a>
+    </div>
+  </body>
+</html>
