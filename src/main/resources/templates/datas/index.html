@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
   <head>
     <meta charset="utf-8" />
-    <title>Listing Players - baseball</title>
+    <title>Listing Players</title>
     <!-- cssとjavascriptのファイルを読み込む -->
     <link rel="stylesheet" href="/css/bootstrap.css" />
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.js"></script>
   </head>
   <body>
-    <div class="container">
+    <div class="container" layout:fragment="content">
       <h1>Listing Players</h1>
       <table class="table">
         <thead>
@@ -36,7 +36,7 @@ th:each="player:${players}"のようにすることでループ処理を記述�
             <td th:text="*{team}"></td>
             <td th:text="*{position}"></td>
             <!-- th:href="xxx"とすることでhref属性に設定する値を動的にすることができる
-/players/{id}の部分がhref属性に設定される値。{id}の部分は変数を埋め込むことができて、後続の(id=*{id})で値を設定している -->
+/datas/{id}の部分がhref属性に設定される値。{id}の部分は変数を埋め込むことができて、後続の(id=*{id})で値を設定している -->
             <td><a class="btn btn-default btn-xs" th:href="@{/datas/{id}(id=*{id})}">参照</a></td>
             <td><a class="btn btn-default btn-xs" th:href="@{/datas/{id}/edit(id=*{id})}">編集</a></td>
             <td>

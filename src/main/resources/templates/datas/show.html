@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
   <head>
     <meta charset="utf-8" />
-    <title>Show Player - baseball</title>
+    <title>Show Player</title>
     <link rel="stylesheet" href="/css/bootstrap.css" />
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.js"></script>
   </head>
   <body>
-    <div class="container">
+   <div class="container" layout:fragment="content">
       <h1>Show Player</h1>
-      <div th:object="${player}">
+      <div th:object="${data}">
         <div>
           <label>ID</label>
           <p th:text="*{id}"></p>

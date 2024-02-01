@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -34,6 +36,12 @@ public class DataController {
 
     @GetMapping("new")
     public String newData(Model model) {
+    	//①:新規作成画面に対してPlayerインスタンスを渡すようにする
+    	//これがないと入力エラー時に入力していた内容を保持することができない
+    	//②:playerに@Validをつけることでvalidationチェック対象となる
+    	//アノテーションを横並びにしているが@Validはplayerにかかっている
+    	Data data = new Data();
+    	model.addAttribute("Data", data);
         return "datas/new";
     }
 
@@ -53,14 +61,17 @@ public class DataController {
     }
 
     @PostMapping
-    public String create(@ModelAttribute Data data) { // ⑥メソッドの引数に@ModelAttributeをつけると送信されたリクエストのbodyの情報を取得できる
+    public String create(@Validated 
+    		@ModelAttribute Data data, BindingResult bindingResult) { 
+    	if(bindingResult.hasErrors()) return "datas/new";
     	dataService.save(data);
-        return "redirect:/datas"; // ⑦"redirect:/datas"とすると/datasにリダイレクトされる
-        //createメソッドの処理が終わった後にhttp://localhost:8080/datasに勝手にアクセスされる感じ
+        return "redirect:/datas"; 
     }
 
     @PutMapping("{id}")
-    public String update(@PathVariable Long id, @ModelAttribute Data data) {
+    public String update(@PathVariable Long id, @Validated 
+    		@ModelAttribute Data data, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) return "datas/edit";
         data.setId(id);
         dataService.save(data);
         return "redirect:/datas";

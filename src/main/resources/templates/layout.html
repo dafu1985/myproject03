@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<!-- ① -->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <head>
+    <meta charset="utf-8" />
+    <!-- ② -->
+    <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">baseball</title>
+    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+  </head>
+  <body>
+    <!-- ③ -->
+    <div layout:fragment="content"></div>
+  </body>
+</html>
