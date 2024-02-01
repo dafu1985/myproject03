@@ -7,8 +7,6 @@ import com.example.myproject03.domain.Data;
 
 @Repository
 public interface DataRepository extends JpaRepository<Data, Long> {
-
-
 	
 
 }

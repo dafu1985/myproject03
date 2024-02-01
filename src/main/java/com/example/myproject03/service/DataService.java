@@ -19,7 +19,9 @@ public class DataService {
     }
 
     public Data findOne(Long id) {
-        return dataRepository.findOne(id);
+        return dataRepository.findById(id).orElse(null);
+        // メソッド名がfindOneからfindByIdに変わった
+        // Optionalを返すようになったので取得できなかった場合の処理`.orElse(null)`を追加
     }
 
     public Data save(Data data) {
@@ -27,6 +29,7 @@ public class DataService {
     }
 
     public void delete(Long id) {
+    	 // メソッド名がdeleteからdeleteByIdに変わった 
         dataRepository.deleteById(id);
     }
 }
