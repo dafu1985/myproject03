@@ -16,7 +16,7 @@ body{
 	background-image: url(./img/mv.jpg);
 	background-repeat: no-repeat;
     background-position: center;
-    background-size: 100%;
+    background-size: cover;
 	
 }
 	.table {
