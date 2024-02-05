@@ -9,7 +9,7 @@
   </head>
   <body>
     <div class="container" layout:fragment="content">
-      <h1>Editing Player</h1>
+      <h1>登録者編集</h1>
       <form th:action="@{/datas/{id}(id=*{id})}" th:method="put" th:object="${data}">
         <div class="form-group">
           <label class="control-label">名前</label>
