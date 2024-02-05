@@ -57,6 +57,7 @@ public class DataController {
     public String show(@PathVariable Long id, Model model) {
     	Data data = dataService.findOne(id);
         model.addAttribute("data", data);
+        //System.out.println(data);
         return "datas/show";
     }
 
